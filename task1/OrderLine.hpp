@@ -9,14 +9,14 @@ private:
     int quantity;
     
 public:
-    // TODO: Implement constructor with validation
+    //Implemented constructor with validation
     OrderLine(const Book& book, int quantity);
     
-    // TODO: Implement getters
+    //Implemented getters
     Book getBook() const;
     int getQuantity() const;
     
-    // TODO: Implement equality based on book's ISBN
+    //Implemented equality based on book's ISBN
     bool operator==(const OrderLine& other) const;
 };
 

@@ -1,0 +1,27 @@
+//Sam Emison
+//Book.cpp
+//Finishes the TODOs from Book.hpp
+
+#include "Book.hpp"
+#include <stdexcept>
+
+Book::Book(const ISBN& isbn, const std::string& title)
+    : isbn(isbn)
+{
+    if (title.empty()) {
+        throw std::invalid_argument("Book title cannot be empty");
+    }
+    this->title = title;
+}
+
+ISBN Book::getISBN() const {
+    return isbn;
+}
+
+std::string Book::getTitle() const {
+    return title;
+}
+
+bool Book::operator==(const Book& other) const {
+    return isbn == other.isbn;
+}

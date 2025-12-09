@@ -10,14 +10,14 @@ private:
     std::string title;
     
 public:
-    // TODO: Implement constructor with validation
+    //Implemented constructor with validation
     Book(const ISBN& isbn, const std::string& title);
     
-    // TODO: Implement getters
+    //Implemented getters
     ISBN getISBN() const;
     std::string getTitle() const;
     
-    // TODO: Implement equality based on ISBN
+    //Implemented equality based on ISBN
     bool operator==(const Book& other) const;
 };
 

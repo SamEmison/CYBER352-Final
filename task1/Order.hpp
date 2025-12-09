@@ -9,17 +9,17 @@ class Order {
 private:
     std::vector<OrderLine> orderLines;
     
-    // TODO: Helper method to check if book already exists in order
+    //Helper method to check if book already exists in order
     bool containsBook(const Book& book) const;
     
 public:
-    // TODO: Add an order line with validation
+    //Add an order line with validation
     void addOrderLine(const OrderLine& orderLine);
     
-    // TODO: Get all order lines
+    //Get all order lines
     std::vector<OrderLine> getOrderLines() const;
     
-    // TODO: Get total quantity of books in order
+    //Get total quantity of books in order
     int getTotalQuantity() const;
 };
 
