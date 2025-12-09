@@ -25,6 +25,14 @@ TEST(Task3, OrderStateTransitions) {
     EXPECT_THROW(state.transitionTo(State::PAID), std::runtime_error);
 }
 
+TEST(Task3, InvalidTransitions) {
+    OrderState state;
+    EXPECT_THROW(state.transitionTo(State::SHIPPED), std::runtime_error);
+    state.transitionTo(State::CANCELLED);
+    EXPECT_THROW(state.transitionTo(State::PAID), std::runtime_error);
+}
+
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

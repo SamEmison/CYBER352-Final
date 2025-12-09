@@ -39,6 +39,13 @@ TEST(Task1, OrderAggregate) {
     EXPECT_EQ(2, order.getOrderLines().size());
     EXPECT_EQ(5, order.getTotalQuantity());
 }
+//Extra Test
+TEST(Task1, EdgeCases) {
+    ISBN validISBN("9783161484100");
+    EXPECT_THROW(Book(validISBN, ""), std::invalid_argument);
+    Book book(validISBN, "Test Book");
+    EXPECT_THROW(OrderLine(book, 0), std::invalid_argument);
+}
 
 //Added this to start it
 int main(int argc, char **argv) {

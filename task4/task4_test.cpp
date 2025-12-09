@@ -26,6 +26,13 @@ TEST(Task4, FeatureToggleSecurity) {
     EXPECT_LT(duration.count(), 1000); // Less than 1ms
 }
 
+TEST(Task4, InvalidFeature) {
+    std::vector<std::string> features = {"feature1", "feature2"};
+    FeatureToggle toggle(features);
+    EXPECT_THROW(toggle.setFeatureState("invalid_feature", true, "admin_token_123"), std::runtime_error);
+    EXPECT_FALSE(toggle.isEnabled("invalid_feature"));
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

@@ -30,6 +30,17 @@ TEST(Task2, NoCopyAllowed) {
     EXPECT_TRUE(cc1.hasBeenConsumed()); // Moved-from object is consumed
 }
 
+TEST(Task2, ReadOnceEdgeCases) {
+    CreditCardNumber cc("4111111111111111");
+    cc.readOnce();
+    EXPECT_THROW(cc.readOnce(), std::runtime_error);
+
+    CreditCardNumber cc2("4111111111111111");
+    CreditCardNumber cc3 = std::move(cc2);
+    EXPECT_TRUE(cc2.hasBeenConsumed());
+}
+
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

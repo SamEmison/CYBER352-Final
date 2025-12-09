@@ -23,6 +23,14 @@ TEST(Task5, SecureExceptionHandling) {
     EXPECT_THROW(db.executeQuery("SELECT * FROM users"), DatabaseQueryException);
 }
 
+TEST(Task5, EdgeCases) {
+    SecureDatabaseAccessor db("wrong_conn_string");
+    EXPECT_THROW(db.connect(), DatabaseConnectionException);
+
+    SecureDatabaseAccessor db2("valid_connection_string");
+    EXPECT_THROW(db2.executeQuery("SELECT * FROM users"), DatabaseQueryException);
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
