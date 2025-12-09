@@ -39,3 +39,9 @@ TEST(Task1, OrderAggregate) {
     EXPECT_EQ(2, order.getOrderLines().size());
     EXPECT_EQ(5, order.getTotalQuantity());
 }
+
+//Added this to start it
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
