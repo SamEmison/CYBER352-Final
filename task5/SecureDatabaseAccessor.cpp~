@@ -1,0 +1,45 @@
+#include "SecureDatabaseAccessor.hpp"
+#include <iostream>
+
+SecureDatabaseAccessor::SecureDatabaseAccessor(const std::string& connString)
+  : connectionString(connString), isConnected(false) {}
+
+// Sanitize error messages (remove sensitive info)
+std::string SecureDatabaseAccessor::sanitizeErrorMessage(const std::string& rawError) const {
+  std::string sanitized = rawError;
+  size_t pos = sanitized.find(connectionString);
+  if (pos != std::string::npos) {
+    sanitized.replace(pos, connectionString.length(), "[REDACTED]");
+  }
+  return sanitized;
+}
+
+
+void SecureDatabaseAccessor::connect() {
+  // Simulates a conection attempt
+  const std::string validConnection = "valid_connection_string";
+  if (connectionString.empty() || connectionString.find("localhost") == std::string::npos) {
+    isConnected = false;
+    throw DatabaseConnectionException();
+  }
+  isConnected = true;
+}
+
+std::string SecureDatabaseAccessor::executeQuery(const std::string& query) {
+  if (!isConnected) {
+    throw DatabaseQueryException();
+  }
+  // Simulates a query execution
+  if (query.empty() || query.find("DROP") != std::string::npos) {
+    throw DatabaseQueryException();
+  }
+  return "Query executed successfully";
+}
+
+void SecureDatabaseAccessor::disconnect() {
+  isConnected = false;
+}
+
+bool SecureDatabaseAccessor::connected() const {
+  return isConnected;
+}
