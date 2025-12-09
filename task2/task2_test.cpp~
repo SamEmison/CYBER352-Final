@@ -1,0 +1,36 @@
+#include "gtest/gtest.h"
+#include "CrditCardNumber.hpp"
+
+TEST(Task2, CreditCardNumberValidation) {
+    EXPECT_THROW(CreditCardNumber("1234"), std::invalid_argument);
+    EXPECT_THROW(CreditCardNumber("123456789012345x"), std::invalid_argument);
+    EXPECT_NO_THROW(CreditCardNumber("4111111111111111"));
+}
+
+TEST(Task2, ReadOnceBehavior) {
+    CreditCardNumber cc("4111111111111111");
+    EXPECT_FALSE(cc.hasBeenConsumed());
+    
+    std::string readNumber = cc.readOnce();
+    EXPECT_EQ("4111111111111111", readNumber);
+    EXPECT_TRUE(cc.hasBeenConsumed());
+    
+    // Second read should return empty or throw
+    EXPECT_THROW(cc.readOnce(), std::runtime_error);
+}
+
+TEST(Task2, NoCopyAllowed) {
+    CreditCardNumber cc1("4111111111111111");
+    // The following should not compile if uncommented:
+    // CreditCardNumber cc2 = cc1; // Copy constructor deleted
+    // CreditCardNumber cc3(cc1);  // Copy constructor deleted
+    
+    // Move should be allowed
+    CreditCardNumber cc4 = std::move(cc1);
+    EXPECT_TRUE(cc1.hasBeenConsumed()); // Moved-from object is consumed
+}
+
+int main(int argc, char **argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}

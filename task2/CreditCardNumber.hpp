@@ -1,0 +1,35 @@
+#ifndef CREDITCARDNUMBER_HPP
+#define CREDITCARDNUMBER_HPP
+
+#include <string>
+#include <stdexcept>
+#include <regex>
+#include <algorithm>
+
+class CreditCardNumber {
+private:
+    mutable std::string number; // mutable for one-time read
+    mutable bool hasBeenRead;
+    
+    //Make class non-copyable
+    CreditCardNumber(const CreditCardNumber&) = delete;
+    CreditCardNumber& operator=(const CreditCardNumber&) = delete;
+    
+public:
+    //Implemented constructor with validation
+    explicit CreditCardNumber(const std::string& number);
+    
+    //Implemented move constructor and assignment
+    CreditCardNumber(CreditCardNumber&& other) noexcept;
+    CreditCardNumber& operator=(CreditCardNumber&& other) noexcept;
+    
+    //Implemented read-once getter
+    std::string readOnce() const;
+    
+    // TODO: Check if number has been read
+    bool hasBeenConsumed() const;
+    
+    ~CreditCardNumber();
+};
+
+#endif // CREDITCARDNUMBER_HPP
