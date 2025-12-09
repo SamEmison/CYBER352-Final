@@ -1,0 +1,36 @@
+#ifndef ORDERSTATE_HPP
+#define ORDERSTATE_HPP
+
+#include <stdexcept>
+#include <string>
+
+enum class State {
+    CREATED,
+    PAID,
+    SHIPPED,
+    DELIVERED,
+    CANCELLED
+};
+
+class OrderState {
+private:
+    State currentState;
+    
+    // TODO: Helper method to check if transition is valid
+    bool isValidTransition(State from, State to) const;
+    
+public:
+    // TODO: Implement constructor
+    OrderState();
+    
+    // TODO: Implement state transition method
+    void transitionTo(State newState);
+    
+    // TODO: Implement getter
+    State getCurrentState() const;
+    
+    // TODO: Implement string representation
+    std::string toString() const;
+};
+
+#endif // ORDERSTATE_HPP
